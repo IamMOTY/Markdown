@@ -1,16 +1,18 @@
 package markup;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class ListItem extends AbstractMarkup {
+public class ListItem {
 
+    List<Container> list = new ArrayList<>();
 
-    ListItem(List<Markup> list) {
-        super(list, "ListItem");
+    public ListItem(List<Container> list) {
+        this.list = list;
     }
 
     public StringBuilder toTex(StringBuilder stringBuilder) {
-        for (Markup entry : list) {
+        for (Container entry : list) {
             stringBuilder.append("\\item ");
             stringBuilder = entry.toTex(stringBuilder);
         }
@@ -18,7 +20,7 @@ public class ListItem extends AbstractMarkup {
     }
 
     public StringBuilder toHtml(StringBuilder stringBuilder) {
-        for (Markup entry : list) {
+        for (Container entry : list) {
             stringBuilder.append("<li>");
             stringBuilder = entry.toHtml(stringBuilder);
             stringBuilder.append("</li>");

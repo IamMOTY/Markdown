@@ -6,11 +6,10 @@ import java.util.Map;
 
 public class AbstractMarkup implements Markup {
     protected List<Markup> list = new ArrayList<>();
-    private String type;
-    private Map<String, List<String>> markdownAdding = Map.of("Emphasis", List.of("*", "*"), "Strong", List.of("__", "__"), "Strikeout", List.of("~", "~"), "Paragraph", List.of("", ""));
-    private Map<String, List<String>> TexAdding = Map.of("Emphasis", List.of("\\emph{", "}"), "Strong", List.of("\\textbf{", "}"), "Strikeout", List.of("\\textst{", "}"), "Paragraph", List.of("", ""), "OrderedList", List.of("\\begin{enumerate}", "\\end{enumerate}"), "UnorderedList", List.of("\\begin{itemize}", "\\end{itemize}"));
-    private Map<String, List<String>> HtmlAdding = Map.of("Emphasis", List.of("<em>", "</em>"), "Strong", List.of("<strong>", "</strong>"), "Strikeout", List.of("<s>", "</s>"), "Paragraph", List.of("", ""), "OrderedList", List.of("<ol>", "</ol>"), "UnorderedList", List.of("<ul>", "</ul>"));
-
+    private final String type;
+    private static final Map<String, List<String>> MARKDOWN_ADDING = Map.of("Emphasis", List.of("*", "*"), "Strong", List.of("__", "__"), "Strikeout", List.of("~", "~"));
+    private static final Map<String, List<String>> TEX_ADDING = Map.of("Emphasis", List.of("\\emph{", "}"), "Strong", List.of("\\textbf{", "}"), "Strikeout", List.of("\\textst{", "}"));
+    private static final Map<String, List<String>> HTML_ADDING = Map.of("Emphasis", List.of("<em>", "</em>"), "Strong", List.of("<strong>", "</strong>"), "Strikeout", List.of("<s>", "</s>"));
 
     AbstractMarkup(List<Markup> list, String type) {
         this.list = list;
@@ -18,7 +17,7 @@ public class AbstractMarkup implements Markup {
     }
 
     public StringBuilder toMarkdown(StringBuilder stringBuilder) {
-        List<String> adding = markdownAdding.get(type);
+        List<String> adding = MARKDOWN_ADDING.get(type);
         stringBuilder.append(adding.get(0));
         for (Markup entry : list) {
             stringBuilder = entry.toMarkdown(stringBuilder);
@@ -28,7 +27,7 @@ public class AbstractMarkup implements Markup {
     }
 
     public StringBuilder toTex(StringBuilder stringBuilder) {
-        List<String> adding = TexAdding.get(type);
+        List<String> adding = TEX_ADDING.get(type);
         stringBuilder.append(adding.get(0));
         for (Markup entry : list) {
             stringBuilder = entry.toTex(stringBuilder);
@@ -38,7 +37,7 @@ public class AbstractMarkup implements Markup {
     }
 
     public StringBuilder toHtml(StringBuilder stringBuilder) {
-        List<String> adding = HtmlAdding.get(type);
+        List<String> adding = HTML_ADDING.get(type);
         stringBuilder.append(adding.get(0));
         for (Markup entry : list) {
             stringBuilder = entry.toHtml(stringBuilder);

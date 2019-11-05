@@ -2,8 +2,8 @@ package markup;
 
 import java.util.List;
 
-public class UnorderedList extends AbstractMarkup {
-    UnorderedList(List<Markup> list) {
+public class UnorderedList extends AbstractContainer {
+    public UnorderedList(List<ListItem> list) {
         super(list, "UnorderedList");
     }
 }
