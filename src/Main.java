@@ -1,9 +1,9 @@
 import markup.*;
-import org.w3c.dom.ls.LSOutput;
 
 import java.util.List;
 
 public class Main {
+
     public static void main(String[] args) {
         final Paragraph paragraph1 = new Paragraph(List.of(
                 new Strong(List.of(
@@ -20,5 +20,5 @@ public class Main {
                 ))
         ));
     }
-
+    Paragraph paragraph;
 }
