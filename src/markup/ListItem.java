@@ -5,7 +5,7 @@ import java.util.List;
 
 public class ListItem {
 
-    List<Container> list = new ArrayList<>();
+    List<Container> list;
 
     public ListItem(List<Container> list) {
         this.list = list;

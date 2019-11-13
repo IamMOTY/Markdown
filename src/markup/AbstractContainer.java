@@ -3,12 +3,62 @@ package markup;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.function.UnaryOperator;
 
-public class AbstractContainer implements Container {
-    protected List<ListItem> list = new ArrayList<>();
+public abstract class AbstractContainer implements Container {
+
+    private enum TexTag {
+
+        ORDERED_LIST ("enumerate"),
+        UNORDERED_LIST ("itemize");
+
+        String tag;
+
+        TexTag (String tag) {
+            this.tag = tag;
+        }
+
+        public String getTag(){
+            return tag;
+        }
+
+        public String getPrefix(){
+            return "\\begin{" + tag + "}";
+
+        }
+
+        public String getSuffix(){
+            return "\\end{" + tag + "}";
+        }
+    }
+
+    private enum HtmlTag {
+
+        ORDERED_LIST ("ol"),
+        UNORDERED_LIST ("ul");
+
+        String tag;
+
+        HtmlTag (String tag) {
+            this.tag = tag;
+        }
+
+        public String getTag(){
+            return tag;
+        }
+
+        public String getPrefix(){
+            return "<" + tag + ">";
+
+        }
+
+        public String getSuffix(){
+            return "</" + tag + ">";
+        }
+    }
+
+    protected List<ListItem> list;
     private final String type;
-    private static final Map<String, List<String>> TEX_ADDING = Map.of("OrderedList", List.of("\\begin{enumerate}", "\\end{enumerate}"), "UnorderedList", List.of("\\begin{itemize}", "\\end{itemize}"));
-    private static final Map<String, List<String>> HTML_ADDING = Map.of( "OrderedList", List.of("<ol>", "</ol>"), "UnorderedList", List.of("<ul>", "</ul>"));
 
     AbstractContainer(List<ListItem> list, String type) {
         this.list = list;
@@ -16,21 +66,21 @@ public class AbstractContainer implements Container {
     }
 
     public StringBuilder toHtml(StringBuilder stringBuilder) {
-        List<String> adding = HTML_ADDING.get(type);
-        stringBuilder.append(adding.get(0));
+        stringBuilder.append(HtmlTag.valueOf(type).getPrefix());
         for (ListItem entry : list) {
             stringBuilder = entry.toHtml(stringBuilder);
         }
-        stringBuilder.append(adding.get(1));
+        stringBuilder.append(HtmlTag.valueOf(type).getSuffix());
         return stringBuilder;
     }
     public StringBuilder toTex(StringBuilder stringBuilder) {
-        List<String> adding = TEX_ADDING.get(type);
-        stringBuilder.append(adding.get(0));
+        stringBuilder.append(TexTag.valueOf(type).getPrefix());
         for (ListItem entry : list) {
-            stringBuilder = entry.toTex(stringBuilder);
+            stringBuilder = entry.toHtml(stringBuilder);
         }
-        stringBuilder.append(adding.get(1));
+        stringBuilder.append(TexTag.valueOf(type).getSuffix());
         return stringBuilder;
     }
+
+
 }
