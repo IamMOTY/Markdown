@@ -37,8 +37,8 @@ public class MarkdownTest extends AbstractTest {
                 ))
         ));
         test(
-            paragraph,
-            "__<1~<2*<34*>5~>6__>"
+                paragraph,
+                "__<1~<2*<34*>5~>6__>"
         );
         test(new Paragraph(List.of(
                 new Strong(List.of(new Text("sdq"), new Strikeout(List.of(new Emphasis(List.of(new Text("r"))), new Text("vavc"))), new Text("zg"))))),

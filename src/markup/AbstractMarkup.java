@@ -5,51 +5,49 @@ import java.util.List;
 import java.util.Map;
 
 
-
-
 public abstract class AbstractMarkup {
     private enum MarkdownTag {
-        EMPHASIS ("*"),
-        STRONG ("__"),
-        STRIKEOUT ("~"),
-        PARAGRAPH ("");
+        EMPHASIS("*"),
+        STRONG("__"),
+        STRIKEOUT("~"),
+        PARAGRAPH("");
 
         private String tag;
 
-        MarkdownTag (String tag) {
+        MarkdownTag(String tag) {
             this.tag = tag;
         }
 
-        public String getTag(){
+        public String getTag() {
             return tag;
         }
 
-        public String getPrefix(){
+        public String getPrefix() {
             return tag;
         }
 
-        public String getSuffix(){
+        public String getSuffix() {
             return tag;
         }
     }
 
     private enum TexTag {
-        EMPHASIS ("emph"),
-        STRONG ("textbf"),
-        STRIKEOUT ("textst"),
-        PARAGRAPH ("");
+        EMPHASIS("emph"),
+        STRONG("textbf"),
+        STRIKEOUT("textst"),
+        PARAGRAPH("");
 
-        String tag;
+        private String tag;
 
-        TexTag (String tag) {
+        TexTag(String tag) {
             this.tag = tag;
         }
 
-        public String getTag(){
+        public String getTag() {
             return tag;
         }
 
-        public String getPrefix(){
+        public String getPrefix() {
             if (tag.length() == 0) {
                 return tag;
             } else {
@@ -57,7 +55,7 @@ public abstract class AbstractMarkup {
             }
         }
 
-        public String getSuffix(){
+        public String getSuffix() {
             if (tag.length() == 0) {
                 return tag;
             } else {
@@ -66,23 +64,23 @@ public abstract class AbstractMarkup {
         }
     }
 
-    public enum HtmlTag {
-        EMPHASIS ("em"),
-        STRONG ("strong"),
-        STRIKEOUT ("s"),
-        PARAGRAPH ("");
+    private enum HtmlTag {
+        EMPHASIS("em"),
+        STRONG("strong"),
+        STRIKEOUT("s"),
+        PARAGRAPH("");
 
-        String tag;
+        private String tag;
 
-        HtmlTag (String tag) {
+        HtmlTag(String tag) {
             this.tag = tag;
         }
 
-        public String getTag(){
+        public String getTag() {
             return tag;
         }
 
-        public String getPrefix(){
+        public String getPrefix() {
             if (tag.length() == 0) {
                 return tag;
             } else {
@@ -90,7 +88,7 @@ public abstract class AbstractMarkup {
             }
         }
 
-        public String getSuffix(){
+        public String getSuffix() {
             if (tag.length() == 0) {
                 return tag;
             } else {
@@ -106,7 +104,6 @@ public abstract class AbstractMarkup {
         this.list = list;
         this.type = type;
     }
-
 
 
     public StringBuilder toMarkdown(StringBuilder stringBuilder) {
