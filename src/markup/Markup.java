@@ -1,9 +1,9 @@
 package markup;
 
 public interface Markup {
-    StringBuilder toMarkdown(StringBuilder stringBuilder);
+    void toMarkdown(StringBuilder stringBuilder);
 
-    StringBuilder toTex(StringBuilder stringBuilder);
+    void toTex(StringBuilder stringBuilder);
 
-    StringBuilder toHtml(StringBuilder stringBuilder);
+    void toHtml(StringBuilder stringBuilder);
 }

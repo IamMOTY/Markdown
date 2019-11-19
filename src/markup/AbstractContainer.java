@@ -3,7 +3,7 @@ package markup;
 import java.util.List;
 import java.util.function.BiConsumer;
 
-public abstract class AbstractContainer implements Container {
+public abstract class AbstractContainer {
 
     private enum TexTag {
         ORDERED_LIST("enumerate"),
@@ -58,16 +58,12 @@ public abstract class AbstractContainer implements Container {
         this.type = type;
     }
 
-    @Override
-    public StringBuilder toHtml(StringBuilder stringBuilder) {
+    public void toHtml(StringBuilder stringBuilder) {
         render(stringBuilder, HtmlTag.valueOf(type).getPrefix(), HtmlTag.valueOf(type).getSuffix(), MarkupableContainer::toHtml);
-        return stringBuilder;
     }
 
-    @Override
-    public StringBuilder toTex(StringBuilder stringBuilder) {
+    public void toTex(StringBuilder stringBuilder) {
         render(stringBuilder, TexTag.valueOf(type).getPrefix(), TexTag.valueOf(type).getSuffix(), MarkupableContainer::toTex);
-        return stringBuilder;
     }
 
     private void render(StringBuilder stringBuilder, final String prefix, final String suffix, final BiConsumer<ListItem, StringBuilder> biConsumer) {

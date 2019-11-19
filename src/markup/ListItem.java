@@ -19,22 +19,20 @@ public class ListItem implements MarkupableContainer {
     }
 
     @Override
-    public StringBuilder toTex(StringBuilder stringBuilder) {
+    public void toTex(StringBuilder stringBuilder) {
         render(stringBuilder, TEX_PREFIX, TEX_SUFFIX, Container::toTex);
-        return stringBuilder;
     }
 
     @Override
-    public StringBuilder toHtml(StringBuilder stringBuilder) {
+    public void toHtml(StringBuilder stringBuilder) {
         render(stringBuilder, HTML_PREFIX, HTML_SUFFIX, Container::toHtml);
-        return stringBuilder;
     }
 
     private void render(StringBuilder stringBuilder, final String prefix, final String suffix, final BiConsumer<Container, StringBuilder> biConsumer) {
-        stringBuilder.append(prefix);
         for (Container entry : list) {
+            stringBuilder.append(prefix);
             biConsumer.accept(entry, stringBuilder);
+            stringBuilder.append(suffix);
         }
-        stringBuilder.append(suffix);
     }
 }

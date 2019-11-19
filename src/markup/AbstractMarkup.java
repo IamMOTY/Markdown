@@ -98,19 +98,16 @@ public abstract class AbstractMarkup {
         this.type = type;
     }
 
-    public StringBuilder toMarkdown(StringBuilder stringBuilder) {
+    public void toMarkdown(StringBuilder stringBuilder) {
         render(stringBuilder, MarkdownTag.valueOf(type).getPrefix(), MarkdownTag.valueOf(type).getSuffix(), Markup::toMarkdown);
-        return stringBuilder;
     }
 
-    public StringBuilder toTex(StringBuilder stringBuilder) {
+    public void toTex(StringBuilder stringBuilder) {
         render(stringBuilder, TexTag.valueOf(type).getPrefix(), TexTag.valueOf(type).getSuffix(), Markup::toTex);
-        return stringBuilder;
     }
 
-    public StringBuilder toHtml(StringBuilder stringBuilder) {
+    public void toHtml(StringBuilder stringBuilder) {
         render(stringBuilder, HtmlTag.valueOf(type).getPrefix(), HtmlTag.valueOf(type).getSuffix(), Markup::toHtml);
-        return stringBuilder;
     }
 
     private void render(StringBuilder stringBuilder, final String prefix, final String postfix, final BiConsumer<Markup, StringBuilder> biConsumer) {

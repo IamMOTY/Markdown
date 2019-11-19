@@ -7,19 +7,15 @@ public class Text implements Markup {
         this.stringBuilder = new StringBuilder(string);
     }
 
-    public StringBuilder toMarkdown(StringBuilder stringBuilder) {
+    public void toMarkdown(StringBuilder stringBuilder) {
         stringBuilder.append(this.stringBuilder);
-        return stringBuilder;
     }
 
-    public StringBuilder toTex(StringBuilder stringBuilder) {
+    public void toTex(StringBuilder stringBuilder) {
         stringBuilder.append(this.stringBuilder);
-        return stringBuilder;
     }
 
-
-    public StringBuilder toHtml(StringBuilder stringBuilder) {
+    public void toHtml(StringBuilder stringBuilder) {
         stringBuilder.append(this.stringBuilder);
-        return stringBuilder;
     }
 }

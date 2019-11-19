@@ -1,7 +1,7 @@
 package markup;
 
 public interface MarkupableContainer {
-    StringBuilder toHtml(StringBuilder stringBuilder);
+    void toHtml(StringBuilder stringBuilder);
 
-    StringBuilder toTex(StringBuilder stringBuilder);
+    void toTex(StringBuilder stringBuilder);
 }
