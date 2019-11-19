@@ -3,6 +3,7 @@ package markup;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.function.BiConsumer;
 
 
 public abstract class AbstractMarkup {
@@ -16,10 +17,6 @@ public abstract class AbstractMarkup {
 
         MarkdownTag(String tag) {
             this.tag = tag;
-        }
-
-        public String getTag() {
-            return tag;
         }
 
         public String getPrefix() {
@@ -41,10 +38,6 @@ public abstract class AbstractMarkup {
 
         TexTag(String tag) {
             this.tag = tag;
-        }
-
-        public String getTag() {
-            return tag;
         }
 
         public String getPrefix() {
@@ -105,31 +98,26 @@ public abstract class AbstractMarkup {
         this.type = type;
     }
 
-
     public StringBuilder toMarkdown(StringBuilder stringBuilder) {
-        stringBuilder.append(MarkdownTag.valueOf(type).getPrefix());
-        for (Markup entry : list) {
-            stringBuilder = entry.toMarkdown(stringBuilder);
-        }
-        stringBuilder.append(MarkdownTag.valueOf(type).getSuffix());
+        render(stringBuilder, MarkdownTag.valueOf(type).getPrefix(), MarkdownTag.valueOf(type).getSuffix(), Markup::toMarkdown);
         return stringBuilder;
     }
 
     public StringBuilder toTex(StringBuilder stringBuilder) {
-        stringBuilder.append(TexTag.valueOf(type).getPrefix());
-        for (Markup entry : list) {
-            stringBuilder = entry.toTex(stringBuilder);
-        }
-        stringBuilder.append(TexTag.valueOf(type).getSuffix());
+        render(stringBuilder, TexTag.valueOf(type).getPrefix(), TexTag.valueOf(type).getSuffix(), Markup::toTex);
         return stringBuilder;
     }
 
     public StringBuilder toHtml(StringBuilder stringBuilder) {
-        stringBuilder.append(HtmlTag.valueOf(type).getPrefix());
-        for (Markup entry : list) {
-            stringBuilder = entry.toHtml(stringBuilder);
-        }
-        stringBuilder.append(HtmlTag.valueOf(type).getSuffix());
+        render(stringBuilder, HtmlTag.valueOf(type).getPrefix(), HtmlTag.valueOf(type).getSuffix(), Markup::toHtml);
         return stringBuilder;
+    }
+
+    private void render(StringBuilder stringBuilder, final String prefix, final String postfix, final BiConsumer<Markup, StringBuilder> biConsumer) {
+        stringBuilder.append(prefix);
+        for (Markup entry : list) {
+            biConsumer.accept(entry, stringBuilder);
+        }
+        stringBuilder.append(postfix);
     }
 }

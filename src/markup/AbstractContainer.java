@@ -15,10 +15,6 @@ public abstract class AbstractContainer implements Container {
             this.tag = tag;
         }
 
-        public String getTag() {
-            return tag;
-        }
-
         public String getPrefix() {
             return "\\begin{" + tag + "}";
 
@@ -62,27 +58,24 @@ public abstract class AbstractContainer implements Container {
         this.type = type;
     }
 
+    @Override
     public StringBuilder toHtml(StringBuilder stringBuilder) {
-        stringBuilder.append(HtmlTag.valueOf(type).getPrefix());
-        for (ListItem entry : list) {
-            stringBuilder = entry.toHtml(stringBuilder);
-        }
-        stringBuilder.append(HtmlTag.valueOf(type).getSuffix());
+        render(stringBuilder, HtmlTag.valueOf(type).getPrefix(), HtmlTag.valueOf(type).getSuffix(), MarkupableContainer::toHtml);
         return stringBuilder;
     }
 
+    @Override
     public StringBuilder toTex(StringBuilder stringBuilder) {
-        stringBuilder.append(TexTag.valueOf(type).getPrefix());
-        render(stringBuilder, Container::toTex);
-        stringBuilder.append(TexTag.valueOf(type).getSuffix());
+        render(stringBuilder, TexTag.valueOf(type).getPrefix(), TexTag.valueOf(type).getSuffix(), MarkupableContainer::toTex);
         return stringBuilder;
     }
 
-    private void render(StringBuilder stringBuilder, final BiConsumer<ListItem, StringBuilder> biConsumer) {
+    private void render(StringBuilder stringBuilder, final String prefix, final String suffix, final BiConsumer<ListItem, StringBuilder> biConsumer) {
+        stringBuilder.append(prefix);
         for (ListItem entry : list) {
             biConsumer.accept(entry, stringBuilder);
         }
+        stringBuilder.append(suffix);
     }
-
 
 }
