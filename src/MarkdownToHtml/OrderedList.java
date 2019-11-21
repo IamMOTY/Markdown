@@ -1,4 +1,4 @@
-package markup;
+package MarkdownToHtml;
 
 import java.util.List;
 
