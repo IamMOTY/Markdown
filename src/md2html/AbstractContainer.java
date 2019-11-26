@@ -1,4 +1,4 @@
-package MarkdownToHtml;
+package md2html;
 
 import java.util.List;
 import java.util.function.BiConsumer;

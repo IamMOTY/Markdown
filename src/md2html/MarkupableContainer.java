@@ -1,4 +1,4 @@
-package MarkdownToHtml;
+package md2html;
 
 public interface MarkupableContainer {
     void toHtml(StringBuilder stringBuilder);

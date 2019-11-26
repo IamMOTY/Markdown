@@ -1,5 +1,7 @@
 package base;
 
+import md2html.Md2HtmlTest;
+
 import java.io.*;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -75,7 +77,7 @@ public class MainChecker extends Randomized {
         counter.passed();
     }
 
-    public void printStatus() {
+    public void printStatus(Class<? extends Md2HtmlTest> aClass) {
         counter.printStatus(getClass());
     }
 }

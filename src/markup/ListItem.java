@@ -5,7 +5,7 @@ import java.util.function.BiConsumer;
 
 public class ListItem implements MarkupableContainer {
 
-    List<Container> list;
+    private List<Container> list;
 
     public ListItem(List<Container> list) {
         this.list = list;

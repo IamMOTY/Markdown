@@ -1,4 +1,4 @@
-package MarkdownToHtml;
+package md2html;
 
 import java.io.IOException;
 
@@ -17,9 +17,11 @@ public class Block {
                     return;
                 }
             }
+            this.stringBuilder.append(string);
+            string = (scanner.hasNextLine()) ? scanner.nextLine() : "";
             while (!string.equals("")) {
-                this.stringBuilder.append(string);
                 this.stringBuilder.append('\n');
+                this.stringBuilder.append(string);
                 if (scanner.hasNextLine()) {
                     string = scanner.nextLine();
                 } else {

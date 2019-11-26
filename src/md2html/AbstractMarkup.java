@@ -1,4 +1,4 @@
-package MarkdownToHtml;
+package md2html;
 
 import java.util.List;
 import java.util.function.BiConsumer;
@@ -9,7 +9,8 @@ public abstract class AbstractMarkup {
         EMPHASIS("*"),
         STRONG("__"),
         STRIKEOUT("~"),
-        PARAGRAPH("");
+        PARAGRAPH(""),
+        CODE("`");
 
         private String tag;
 
@@ -59,7 +60,8 @@ public abstract class AbstractMarkup {
         EMPHASIS("em"),
         STRONG("strong"),
         STRIKEOUT("s"),
-        PARAGRAPH("p");
+        PARAGRAPH("p"),
+        CODE("code");
 
         private String tag;
 

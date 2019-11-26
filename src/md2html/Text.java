@@ -1,32 +1,27 @@
-package MarkdownToHtml;
+package md2html;
 
-import java.util.Map;
+public class Text implements Markup {
+    private StringBuilder stringBuilder;
 
-public class Code implements Markup {
 
-    String string;
-
-    Code(String string) {
-        this.string = string;
+    public Text(String string) {
+        this.stringBuilder = new StringBuilder(string);
+    }
+    public Text(StringBuilder stringBuilder) {
+        this.stringBuilder = stringBuilder;
     }
 
-    @Override
     public void toMarkdown(StringBuilder stringBuilder) {
-
+        stringBuilder.append(this.stringBuilder);
     }
 
-    @Override
     public void toTex(StringBuilder stringBuilder) {
-
+        stringBuilder.append(this.stringBuilder);
     }
 
-    @Override
     public void toHtml(StringBuilder stringBuilder) {
-        final String PREFIX = "<code>";
-        final String SUFFIX = "</code>";
-        stringBuilder.append(PREFIX);
-        for (int i = 0; i < this.string.length(); i++) {
-            char current = this.string.charAt(i);
+        for (int i = 0; i < this.stringBuilder.length(); i++) {
+            char current = this.stringBuilder.charAt(i);
             String tag;
             switch (current) {
                 case '<':
@@ -44,6 +39,5 @@ public class Code implements Markup {
             }
             stringBuilder.append(tag);
         }
-        stringBuilder.append(SUFFIX);
     }
 }

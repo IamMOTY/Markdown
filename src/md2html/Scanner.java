@@ -1,7 +1,6 @@
-package MarkdownToHtml;
+package md2html;
 
 import java.io.*;
-import java.nio.Buffer;
 import java.nio.charset.StandardCharsets;
 
 

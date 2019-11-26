@@ -1,4 +1,4 @@
-package MarkdownToHtml;
+package md2html;
 
 public interface Markup {
     void toMarkdown(StringBuilder stringBuilder);
